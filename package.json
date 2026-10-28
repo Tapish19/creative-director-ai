@@ -1,0 +1,56 @@
+{
+  "name": "creative-director-ai",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "worker": "tsx workers/text-worker.ts",
+    "worker:images": "tsx workers/image-worker.ts",
+    "worker:voice": "tsx workers/voice-worker.ts",
+    "voice:smoke": "tsx scripts/voice-smoke.ts",
+    "worker:render": "tsx workers/render-worker.ts",
+    "render:smoke": "tsx scripts/render-smoke.ts",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "check": "npm run lint && npm run typecheck && npm test",
+    "worker:review": "tsx workers/review-worker.ts"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.0.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.577.0",
+    "next": "^16.4.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "server-only": "^0.0.1",
+    "sharp": "^0.35.5",
+    "tsx": "^4.23.15",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.11",
+    "@playwright/test": "^1.58.0",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.4.3",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.9.0",
+    "vitest": "^4.0.0"
+  }
+}
