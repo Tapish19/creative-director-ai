@@ -1,8 +1,10 @@
 # Creative Director AI
 
+[Live web app](https://creative-director-ai-ochre.vercel.app) ? [GitHub repository](https://github.com/Tapish19/creative-director-ai)
+
 A creative production studio that turns a marketing brief into a planned story, a structured script, generated scene images, spoken narration and a real FFmpeg-rendered MP4. A structured audiovisual review scores the result; feedback-driven revisions, script editing and scene regeneration preserve every version. Owners approve an exact reviewed version, with an auditable decision and final MP4 download.
 
-**Current milestone: Phase 8 implemented; live cloud credentials pending.** Campaign CRUD, Supabase Auth, Gemini planner/writer agents, Cloudflare FLUX images, ElevenLabs or local speech, durable PostgreSQL jobs, FFmpeg rendering, private playback/downloads, audiovisual AI reviews, quality gates, bounded feedback revisions, script/scene editing, authenticated human approval and persisted attempt history are implemented. Native tests render and decode actual 15- and 30-second videos. Controlled cloud responses and storage transport exist only in tests. Hosted authentication/storage and live AI outputs remain unverified. No runtime mock provider is installed, and the application has not been deployed.
+**Current milestone: Phase 8 implemented; live cloud credentials pending.** Campaign CRUD, Supabase Auth, Gemini planner/writer agents, Cloudflare FLUX images, ElevenLabs or local speech, durable PostgreSQL jobs, FFmpeg rendering, private playback/downloads, audiovisual AI reviews, quality gates, bounded feedback revisions, script/scene editing, authenticated human approval and persisted attempt history are implemented. Native tests render and decode actual 15- and 30-second videos. Controlled cloud responses and storage transport exist only in tests. Hosted authentication/storage and live AI outputs remain unverified. No runtime mock provider is installed. The web app is deployed on Vercel and currently shows its explicit unconfigured state; Supabase, provider credentials and background worker hosting still need configuration.
 
 See the [implementation plan](docs/implementation-plan.md), [text guide](docs/phase-2.md), [image guide](docs/phase-3.md), [voice guide](docs/phase-4.md), [rendering guide](docs/phase-5.md), [review guide](docs/phase-6.md), [revision guide](docs/phase-7.md) and [approval guide](docs/phase-8.md).
 
@@ -34,7 +36,7 @@ flowchart TD
     H -->|Request changes| S
 ```
 
-The workflow through human approval is implemented. Live provider acceptance and deployment remain pending.
+The workflow through human approval is implemented. The web app is deployed; live provider acceptance and background worker hosting remain pending.
 
 ```mermaid
 flowchart LR
@@ -285,7 +287,7 @@ The video milestone needs a Next.js web process, Supabase and long-running Node 
 8. Configure the deployed origin and `/auth/callback` in Supabase Auth.
 9. Test a real MyHotelLine generation, play/download its MP4 and verify another account cannot access its rows or private images/audio/video before sharing the app.
 
-A platform may sleep a free worker, leaving jobs queued until it wakes. Serverless request handlers are not a substitute for this worker process. Rendering needs a container-capable worker with FFmpeg; local speech also needs its installed engine. Cloudflare Workers cannot execute the native FFmpeg subprocess. No deployment has been performed yet.
+A platform may sleep a free worker, leaving jobs queued until it wakes. Serverless request handlers are not a substitute for this worker process. Rendering needs a container-capable worker with FFmpeg; local speech also needs its installed engine. Cloudflare Workers cannot execute the native FFmpeg subprocess. The web app is deployed at https://creative-director-ai-ochre.vercel.app from the GitHub-connected `main` branch. The background workers are not deployed. See [Vercel deployment](docs/deployment.md) for the remaining configuration.
 
 ## Design decisions
 
@@ -307,7 +309,7 @@ A platform may sleep a free worker, leaving jobs queued until it wakes. Serverle
 - Real local Windows speech has been verified. Linux eSpeak is wired into CI but was not executed on this Windows host. Local voice naturalness and pronunciation vary; the UI identifies it as local synthesis.
 - FLUX Schnell does not document width/height inputs. Sources are center-cropped to portrait; composition and subject consistency across independently generated scenes need live review.
 - An interrupted upload/commit may leave an unreferenced private object. Automated orphan cleanup is not implemented; use a retention job that reconciles against all committed image/audio/video paths before scaling storage.
-- Real local MP4s have been produced; the hosted application and a live AI-generated campaign remain unverified.
+- Real local MP4s have been produced; the deployed setup pages have been verified; an authenticated, live AI-generated campaign remains unverified.
 - Website URLs are stored as reference; no website content is fetched or researched.
 - Narration is English-focused. Captions follow storyboard timing, so exact spoken-word alignment is not provided. Overlong speech can require a shorter script.
 - A response that meets structural constraints can still be creatively weak or factually wrong; AI review does not replace human inspection and approval.
