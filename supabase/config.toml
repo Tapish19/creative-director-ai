@@ -17,8 +17,8 @@ port = 54323
 
 [auth]
 enabled = true
-site_url = "http://localhost:3000"
-additional_redirect_urls = ["http://localhost:3000/auth/callback"]
+site_url = "https://creative-director-ai-ochre.vercel.app"
+additional_redirect_urls = ["https://creative-director-ai-ochre.vercel.app/auth/callback", "http://localhost:3000/auth/callback"]
 
 [auth.email]
 enable_signup = true
