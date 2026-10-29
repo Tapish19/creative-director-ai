@@ -4,7 +4,7 @@
 
 A creative production studio that turns a marketing brief into a planned story, a structured script, generated scene images, spoken narration and a real FFmpeg-rendered MP4. A structured audiovisual review scores the result; feedback-driven revisions, script editing and scene regeneration preserve every version. Owners approve an exact reviewed version, with an auditable decision and final MP4 download.
 
-**Current milestone: Phase 8 implemented; Supabase connected; AI provider credentials and worker hosting pending.** Campaign CRUD, Supabase Auth, Gemini planner/writer agents, Cloudflare FLUX images, ElevenLabs or local speech, durable PostgreSQL jobs, FFmpeg rendering, private playback/downloads, audiovisual AI reviews, quality gates, bounded feedback revisions, script/scene editing, authenticated human approval and persisted attempt history are implemented. Native tests render and decode actual 15- and 30-second videos. Controlled cloud responses and storage transport exist only in tests. The web app is deployed on Vercel and connected to a dedicated Supabase project with all migrations applied. Hosted sign-in, storage and live AI outputs still need end-to-end acceptance. No runtime mock provider is installed.
+**Current milestone: Phase 8 implemented; Supabase connected; worker hosting and live acceptance pending.** Campaign CRUD, Supabase Auth, Gemini planner/writer agents, Cloudflare FLUX images, ElevenLabs or local speech, durable PostgreSQL jobs, FFmpeg rendering, private playback/downloads, audiovisual AI reviews, quality gates, bounded feedback revisions, script/scene editing, authenticated human approval and persisted attempt history are implemented. Native tests render and decode actual 15- and 30-second videos. Controlled cloud responses and storage transport exist only in tests. The web app is deployed on Vercel and connected to a dedicated Supabase project with all migrations applied. Gemini and Cloudflare credentials have passed read-only API checks locally; live generation still needs end-to-end acceptance. No runtime mock provider is installed.
 
 See the [implementation plan](docs/implementation-plan.md), [text guide](docs/phase-2.md), [image guide](docs/phase-3.md), [voice guide](docs/phase-4.md), [rendering guide](docs/phase-5.md), [review guide](docs/phase-6.md), [revision guide](docs/phase-7.md) and [approval guide](docs/phase-8.md).
 
@@ -36,7 +36,7 @@ flowchart TD
     H -->|Request changes| S
 ```
 
-The workflow through human approval is implemented. The web app is deployed; live provider acceptance and background worker hosting remain pending.
+The workflow through human approval is implemented. The web app is deployed; live generation acceptance and background worker hosting remain pending.
 
 ```mermaid
 flowchart LR
@@ -301,7 +301,7 @@ A platform may sleep a free worker, leaving jobs queued until it wakes. Serverle
 
 ## Known limitations
 
-- Live hosted Supabase authentication/storage and Gemini/Cloudflare/ElevenLabs outputs still require credentials and validation.
+- Hosted Supabase authentication/storage and live Gemini/Cloudflare outputs still require end-to-end validation; ElevenLabs is optional.
 - PGlite verifies SQL behavior, but does not reproduce the full hosted Supabase Auth, Storage or PostgREST services.
 - Human approval is version-specific and permanent; revocation, team approval and external ad publishing are not implemented. Quality scores never approve a video automatically.
 - Revision scores may not improve monotonically. Targeted edits keep automatic rewrites off; full Regenerate starts a new bounded cycle.

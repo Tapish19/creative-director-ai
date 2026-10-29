@@ -1,0 +1,30 @@
+x-worker: &worker
+  build:
+    context: .
+    dockerfile: Dockerfile.workers
+  image: creative-director-ai-workers:local
+  env_file: .env.worker
+  init: true
+  restart: unless-stopped
+  stop_grace_period: 45s
+
+services:
+  text:
+    <<: *worker
+    command: ["npm", "run", "worker"]
+
+  images:
+    <<: *worker
+    command: ["npm", "run", "worker:images"]
+
+  voice:
+    <<: *worker
+    command: ["npm", "run", "worker:voice"]
+
+  render:
+    <<: *worker
+    command: ["npm", "run", "worker:render"]
+
+  review:
+    <<: *worker
+    command: ["npm", "run", "worker:review"]

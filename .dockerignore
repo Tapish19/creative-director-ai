@@ -1,0 +1,17 @@
+.git
+.github
+.next
+.tools
+.vercel
+artifacts
+coverage
+docs
+node_modules
+out
+playwright-report
+supabase
+test-results
+tests
+.env*
+!.env.example
+*.tsbuildinfo
